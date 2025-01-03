@@ -1,9 +1,25 @@
 spring:
   application:
     name: voiture-service
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/voitureservicedb?createDatabaseIfNotExist=true
+    username: "root"
+    password: ""
+  jpa: 
+    hibernate:
+      ddl-auto: update # Automatically create/update tables
+    show-sql: true # Log SQL queries for debugging
+    properties:
+      hibernate:
+        format_sql: true # Format SQL queries for better readability
   cloud:
     discovery:
       enabled: true
+  # config:
+  #   allow-override: true
+  # main:
+  #   allow-bean-definition-overriding: true
 
 server:
   port: 8089
@@ -16,4 +32,3 @@ eureka:
     fetch-registry: true
   instance:
     hostname: localhost
-

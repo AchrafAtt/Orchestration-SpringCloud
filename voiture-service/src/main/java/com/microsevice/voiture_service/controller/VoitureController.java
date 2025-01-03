@@ -3,13 +3,13 @@ package com.microsevice.voiture_service.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 
-
+import com.microsevice.voiture_service.entites.Voiture;
+import com.microsevice.voiture_service.service.VoitureService;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-import com.microsevice.voiture_service.dto.VoitureDto;
-import com.microsevice.voiture_service.dto.VoitureService;
+
 import java.util.List;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,17 +24,17 @@ public class VoitureController {
 
   
   @GetMapping("/voitures")
-  public List<VoitureDto> voitures(){
+  public List<Voiture> voitures(){
       return voitureService.getVoitures();
   }
   
   @GetMapping("/voiture/{id}")
-  public VoitureDto voiture(@PathVariable Long id) throws Exception{
-      return voitureService.getVoiture(id);
+  public Voiture voiture(@PathVariable Long id) throws Exception{
+      return voitureService.getVoitureWithClient(id);
   }
 
   @PostMapping("/voiture")
-  public VoitureDto createVoiture(@RequestBody VoitureDto voitureDto) {
+  public Voiture createVoiture(@RequestBody Voiture voitureDto) {
     return voitureService.createVoiture(voitureDto);
   }
   

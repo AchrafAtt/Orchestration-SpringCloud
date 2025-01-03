@@ -13,10 +13,13 @@ public class GatewayApplication {
 		SpringApplication.run(GatewayApplication.class, args);
 	}
 
-	@Bean
-	RouteLocator routes(RouteLocatorBuilder builder){
-		return builder.routes()
-		.route(r -> r.path("/clients/**").uri("lb://client-service")).build();
-	}
+
+	//route configuration using java code
+	
+	// @Bean
+	// RouteLocator routes(RouteLocatorBuilder builder){
+	// 	return builder.routes()
+	// 	.route(r -> r.path("/clients/**").uri("lb://client-service")).build();
+	// }
 
 }

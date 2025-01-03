@@ -3,28 +3,44 @@ package com.microservice.client_service.controller;
 
 import com.microservice.client_service.entities.Client;
 import com.microservice.client_service.repository.ClientRepository;
+import com.microservice.client_service.service.ClientSevice;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
 
 @RestController
+@RequestMapping("/client")
 public class ClientContoller {
     @Autowired
-    private ClientRepository clientRepository;
+    private ClientSevice clientSevice;
+
+
+    @PostMapping()
+    public void addClient(@RequestBody Client client){
+        clientSevice.addClient(client);
+    }
+    
 
     @GetMapping("/clients")
     public List<Client> clients(){
-        return clientRepository.findAll();
+        return clientSevice.getClients();
     }
 
     @GetMapping("/client/{id}")
     public Client client(@PathVariable Long id) throws Exception{
-        return clientRepository.findById(id).orElseThrow(()->
-                new Exception("Client not found"))    ;
+        return clientSevice.getClientById(id);
+
     }
+
+    
 
 
 }
